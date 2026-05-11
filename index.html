@@ -34,6 +34,8 @@ a{text-decoration:none;color:inherit}
 .nav-item .chevron{margin-left:auto;font-size:11px;color:var(--text3);transition:transform .2s}
 .nav-item .chevron.open{transform:rotate(90deg)}
 .nav-item.active-parent{font-weight:600}
+.nav-item.active{background:#fde8e8;color:var(--red);font-weight:600;border-radius:6px;margin:2px 10px;padding:10px 14px}
+.nav-item.active svg{stroke:var(--red)}
 .sub-nav{display:none;padding-left:0}
 .sub-nav.open{display:block}
 .sub-item{display:flex;align-items:center;padding:8px 18px 8px 50px;cursor:pointer;color:#374151;font-size:13.5px;transition:background .15s;border-radius:0}
@@ -221,7 +223,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--red)!important;box-sh
   </div>
   <nav class="sidebar-nav" id="sidebarNav">
     <!-- Dashboard -->
-    <div class="nav-item" onclick="goTo('dashboard')">
+    <div class="nav-item active" id="nav-dashboard" onclick="goTo('dashboard')">
       <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       Dashboard
     </div>
@@ -232,7 +234,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--red)!important;box-sh
       <span class="chevron" id="chev-inventory">›</span>
     </div>
     <div class="sub-nav" id="group-inventory">
-      <div class="sub-item active" data-page="stock-overview" onclick="goTo('stock-overview',this)">
+      <div class="sub-item" data-page="stock-overview" onclick="goTo('stock-overview',this)">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
         Stock Overview
       </div>
@@ -326,7 +328,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--red)!important;box-sh
       </div>
     </div>
     <!-- Integrations -->
-    <div class="nav-item" onclick="goTo('integrations')">
+    <div class="nav-item" id="nav-integrations" onclick="goTo('integrations')">
       <svg viewBox="0 0 24 24"><path d="M12 2v6"/><path d="M12 18v4"/><path d="M4.93 4.93l4.24 4.24"/><path d="M14.83 14.83l4.24 4.24"/><path d="M2 12h6"/><path d="M18 12h4"/><path d="M4.93 19.07l4.24-4.24"/><path d="M14.83 9.17l4.24-4.24"/></svg>
       Integrations
     </div>
@@ -1772,8 +1774,16 @@ function goTo(page, subEl){
     document.querySelectorAll('.sub-item').forEach(s=>s.classList.remove('active'));
     subEl.classList.add('active');
   }
+  const dashNav = document.getElementById('nav-dashboard');
+  const intNav = document.getElementById('nav-integrations');
+  if(dashNav) dashNav.classList.remove('active');
+  if(intNav) intNav.classList.remove('active');
   if(page==='dashboard'){
     document.querySelectorAll('.sub-item').forEach(s=>s.classList.remove('active'));
+    dashNav.classList.add('active');
+  } else if(page==='integrations'){
+    document.querySelectorAll('.sub-item').forEach(s=>s.classList.remove('active'));
+    intNav.classList.add('active');
   }
   showPage(page);
   const groups = {'stock-overview':'inventory','locations':'inventory','ops-all':'operations','ops-winder-doffing':'operations','ops-skid-loading':'operations','ops-weighing':'operations','ops-put-away':'operations','ops-picking':'operations','ops-internal-transfer':'operations','ops-stock-taking':'operations','ops-write-off':'operations','md-items':'masterdata','md-partners':'masterdata','md-batches':'masterdata','rpt-turnover':'reports','rpt-stock-status':'reports','rpt-dead-stock':'reports','settings-general':'settings','settings-users':'settings','settings-masterdata':'settings','settings-devices':'settings'};
