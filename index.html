@@ -48,12 +48,16 @@ a{text-decoration:none;color:inherit}
 .sidebar-footer div:last-child{margin-top:3px}
 
 /* MAIN */
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.top-bar{display:flex;align-items:center;justify-content:flex-end;padding:10px 28px;gap:14px;border-bottom:1px solid var(--border-light);background:var(--white)}
-.top-icon{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .15s;position:relative}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative}
+.top-bar{display:none}
+.global-icons{position:absolute;top:28px;right:32px;display:flex;align-items:center;gap:12px;z-index:50}
+.top-icon{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;position:relative;border:none}
 .top-icon:hover{background:#f3f4f6}
-.top-icon svg{width:20px;height:20px;stroke:var(--text2);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.notif-dot{position:absolute;top:6px;right:6px;width:8px;height:8px;background:var(--red);border-radius:50%;border:2px solid var(--white)}
+.top-icon svg{width:20px;height:20px;stroke:#6b7280;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#darkModeBtn{border:1.5px solid #f87171;background:#fff}
+#darkModeBtn:hover{background:#fef2f2}
+#darkModeBtn svg{stroke:#6b7280}
+.notif-dot{position:absolute;top:5px;right:5px;width:8px;height:8px;background:var(--red);border-radius:50%;border:2px solid var(--white)}
 .expand-btn{display:none;background:none;border:none;cursor:pointer;color:var(--text2);font-size:20px;padding:4px 8px;border-radius:4px;margin-right:auto}
 .expand-btn:hover{background:#f3f4f6}
 .sidebar.collapsed~.main .expand-btn{display:flex}
@@ -63,7 +67,7 @@ a{text-decoration:none;color:inherit}
 /* PAGE */
 .page{display:none}
 .page.active{display:block}
-.page-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px}
+.page-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;padding-right:90px}
 .page-title{font-size:24px;font-weight:700;color:var(--text);line-height:1.2}
 .page-subtitle{font-size:13px;color:var(--text2);margin-top:4px}
 .page-actions{display:flex;gap:10px;align-items:center;flex-shrink:0}
@@ -94,7 +98,7 @@ a{text-decoration:none;color:inherit}
 .pill:hover:not(.active){background:#f9fafb}
 
 /* TABLES */
-.table-wrap{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:18px}
+.table-wrap{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:18px;background:var(--white)}
 table{width:100%;border-collapse:collapse}
 thead th{background:var(--table-head);text-align:left;padding:12px 16px;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--text2);font-weight:600;white-space:nowrap;border-bottom:1px solid var(--border)}
 thead th .sort{font-size:9px;margin-left:4px;opacity:.4}
@@ -211,6 +215,44 @@ input:focus,select:focus,textarea:focus{border-color:var(--red)!important;box-sh
 .col-dropdown-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text2);margin-bottom:10px}
 .col-dropdown label{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13px;color:var(--text);cursor:pointer;white-space:nowrap}
 .col-dropdown input[type=checkbox]{width:16px;height:16px;accent-color:#3b82f6;cursor:pointer;flex-shrink:0}
+
+/* DARK MODE */
+body.dark{--white:#1e293b;--bg:#0f172a;--text:#f1f5f9;--text2:#94a3b8;--text3:#64748b;--border:#334155;--border-light:#1e293b;--table-head:#1e293b;--hover:#1e293b;--notice-bg:#1e3a5f;--notice-border:#2563eb;--notice-text:#93c5fd}
+body.dark .sidebar{background:#1e293b}
+body.dark .top-bar{background:#1e293b}
+body.dark .summary-card{background:#1e293b}
+body.dark .summary-card.total{background:#1e293b}
+body.dark .table-wrap{border-color:#334155}
+body.dark .global-icons .top-icon:hover{background:#334155}
+body.dark .global-icons .top-icon svg{stroke:#94a3b8}
+body.dark #darkModeBtn{border-color:#ef4444;background:#1e293b}
+body.dark #darkModeBtn:hover{background:#334155}
+body.dark .info-card{background:#1e293b}
+body.dark .form-modal{background:#1e293b}
+body.dark .integration-card{background:#1e293b}
+body.dark .nav-item:hover,.dark .sub-item:hover{background:#334155}
+body.dark .nav-item.active{background:#3b1c1c;color:var(--red)}
+body.dark .sub-item.active{background:#3b1c1c}
+body.dark .btn{background:#1e293b;border-color:#334155;color:#f1f5f9}
+body.dark .btn:hover{background:#334155}
+body.dark .btn-primary{background:var(--red);color:#fff;border-color:var(--red)}
+body.dark .pill{background:#1e293b;border-color:#334155;color:#94a3b8}
+body.dark input,body.dark select,body.dark textarea{background:#0f172a;border-color:#334155;color:#f1f5f9}
+body.dark .col-dropdown{background:#1e293b;border-color:#334155}
+body.dark .notif-dropdown{background:#1e293b;border-color:#334155}
+body.dark .chat-bubble{box-shadow:0 4px 16px rgba(239,68,68,.2)}
+
+/* NOTIFICATION DROPDOWN */
+.notif-dropdown{display:none;position:absolute;top:100%;right:0;margin-top:8px;background:var(--white);border:1px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.12);width:300px;z-index:60}
+.notif-dropdown.open{display:block}
+.notif-dropdown-header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border-light)}
+.notif-dropdown-header span:first-child{font-size:14px;font-weight:600;color:var(--text)}
+.notif-dropdown-header a{font-size:12px;color:var(--text2);cursor:pointer;margin-left:10px}
+.notif-dropdown-header a:hover{color:var(--red)}
+.notif-dropdown-body{padding:24px 16px;text-align:center;font-size:13px;color:var(--text3)}
+.notif-dropdown-footer{padding:10px 16px;border-top:1px solid var(--border-light);text-align:center}
+.notif-dropdown-footer a{font-size:13px;color:var(--blue);cursor:pointer;font-weight:500}
+.notif-dropdown-footer a:hover{text-decoration:underline}
 
 @media(max-width:900px){
 .sidebar{width:0;min-width:0;overflow:hidden}
@@ -373,14 +415,18 @@ input:focus,select:focus,textarea:focus{border-color:var(--red)!important;box-sh
 
 <!-- MAIN -->
 <div class="main">
-  <div class="top-bar">
-    <button class="expand-btn" onclick="toggleSidebar()" title="Expand sidebar">☰</button>
-    <div class="top-icon" title="Toggle dark mode">
-      <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <div class="global-icons">
+    <div class="top-icon" id="darkModeBtn" title="Toggle dark mode" onclick="toggleDarkMode()">
+      <svg id="darkModeIcon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     </div>
-    <div class="top-icon" title="Notifications">
+    <div class="top-icon" title="Notifications" onclick="toggleNotifDropdown(event)" style="position:relative">
       <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
       <span class="notif-dot"></span>
+      <div class="notif-dropdown" id="notifDropdown">
+        <div class="notif-dropdown-header"><span>Notifications (0)</span><span><a onclick="event.stopPropagation()">Read</a> <a onclick="event.stopPropagation()">Read All</a></span></div>
+        <div class="notif-dropdown-body">No unread notifications.</div>
+        <div class="notif-dropdown-footer"><a onclick="event.stopPropagation()">View all in Journal</a></div>
+      </div>
     </div>
   </div>
   <div class="content" id="content">
@@ -1454,10 +1500,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--red)!important;box-sh
 <div class="page" id="page-settings-general">
   <div class="page-head">
     <div><div class="page-title">Settings</div><div class="page-subtitle">Manage your application settings</div></div>
-    <div class="page-actions">
-      <div class="top-icon"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
-      <div class="top-icon"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
-    </div>
+    <div class="page-actions"></div>
   </div>
   <div class="info-card">
     <h3 style="font-size:16px;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:8px"><svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:var(--text2);fill:none;stroke-width:1.8"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg> Database Instance</h3>
@@ -1501,10 +1544,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--red)!important;box-sh
 <div class="page" id="page-settings-users">
   <div class="page-head">
     <div><div class="page-title">User &amp; Group Management</div><div class="page-subtitle">Manage users, groups, and authentication settings</div></div>
-    <div class="page-actions">
-      <div class="top-icon"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
-      <div class="top-icon"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
-    </div>
+    <div class="page-actions"></div>
   </div>
   <div class="cards-row">
     <div class="summary-card">
@@ -1588,10 +1628,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--red)!important;box-sh
 <div class="page" id="page-settings-masterdata">
   <div class="page-head">
     <div><div class="page-title">Master Data Settings</div><div class="page-subtitle">Configure HYDB table settings and data management options</div></div>
-    <div class="page-actions">
-      <div class="top-icon"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
-      <div class="top-icon"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
-    </div>
+    <div class="page-actions"></div>
   </div>
   <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid var(--border);border-radius:6px;font-size:13px;margin-bottom:16px;cursor:pointer"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--text2);fill:none;stroke-width:2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg> Tables (7/16)</div>
 
@@ -1643,10 +1680,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--red)!important;box-sh
 <div class="page" id="page-settings-devices">
   <div class="page-head">
     <div><div class="page-title">Devices</div><div class="page-subtitle">Manage connected mobile devices</div></div>
-    <div class="page-actions">
-      <div class="top-icon"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
-      <div class="top-icon"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
-    </div>
+    <div class="page-actions"></div>
   </div>
   <div class="table-wrap">
     <table>
@@ -1901,6 +1935,23 @@ function toggleGroup(name){
 function toggleSidebar(){
   document.getElementById('sidebar').classList.toggle('collapsed');
 }
+
+function toggleDarkMode(){
+  document.body.classList.toggle('dark');
+  var icon = document.getElementById('darkModeIcon');
+  if(document.body.classList.contains('dark')){
+    icon.innerHTML = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+  } else {
+    icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+  }
+}
+
+function toggleNotifDropdown(e){
+  e.stopPropagation();
+  var dd = document.getElementById('notifDropdown');
+  dd.classList.toggle('open');
+}
+document.addEventListener('click', function(){ document.getElementById('notifDropdown').classList.remove('open'); });
 
 function switchStockTab(pill, tabId){
   document.querySelectorAll('#stockPills .pill').forEach(p=>p.classList.remove('active'));
